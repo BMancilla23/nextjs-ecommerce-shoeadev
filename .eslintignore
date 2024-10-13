@@ -1,0 +1,4 @@
+app/actions.ts
+app/api/*
+components/ui/*
+docs/*
