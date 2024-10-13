@@ -1,8 +1,10 @@
 import prisma from "@/app/lib/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { NextResponse } from "next/server";
+import { unstable_noStore as noStore } from "next/cache"; // Importa noStore
 
 export async function GET() {
+  noStore(); // Asegura que no se use cache, si necesitas asegurarte de que el contenido no sea cacheado en ciertas rutas, como aquellas que dependen de datos o autenticación dinámica
   try {
     const { getUser } = getKindeServerSession();
 

@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { unstable_noStore as noStore } from "next/cache";
 
 // Función asíncrona para obtener loa datos de las órdenes de los últimos 7 días
 async function getData() {
@@ -46,6 +47,8 @@ async function getData() {
 
 // Componente de página que muestra las estadísticas resumidas y las transacciones recientes
 export default async function SummaryPage() {
+  // Evitar la cacheo para este componente
+  noStore();
   // Obtener los datos de las órdenes de los últimos 7 días
   const data = await getData();
   return (

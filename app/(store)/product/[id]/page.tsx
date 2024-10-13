@@ -5,6 +5,7 @@ import { ShoppingBagButton } from "@/app/components/SubmitButton";
 import prisma from "@/app/lib/db";
 import { StarIcon } from "lucide-react";
 import { notFound } from "next/navigation";
+import { unstable_noStore as noStore } from "next/cache";
 
 // Función para obtener los datos del producto desde la base de datos
 async function getData(productId: string) {
@@ -35,6 +36,7 @@ export default async function ProductIdPage({
 }: {
   params: { id: string };
 }) {
+  noStore();
   // Obtiene los datos del producto con el ID especificado
   const data = await getData(params.id);
 

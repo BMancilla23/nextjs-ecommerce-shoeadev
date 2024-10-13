@@ -1,6 +1,7 @@
 import prisma from "@/app/lib/db";
 import React, { Suspense } from "react";
 import { LoadingProductCard, ProductCard } from "./ProductCard";
+import { unstable_noStore as noStore } from "next/cache";
 
 async function getData() {
   /*   await new Promise((resolver) => setTimeout(resolver, 5000)); */
@@ -37,6 +38,7 @@ export const FeaturedProducts = () => {
 };
 
 export async function LoadFeaturedproducts() {
+  noStore();
   const data = await getData();
   return (
     <div className="mt-5 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
