@@ -329,8 +329,14 @@ export async function checkout() {
     const session = await stripe.checkout.sessions.create({
       mode: "payment", // Modo de pago (puede ser 'payment', 'subscription', etc)
       line_items: lineItems, // Los items crados anteriormente
-      success_url: "http://localhost:3000/payment/success", // URL a donde redirigir tras un pago exitoso
-      cancel_url: "http://localhost:3000/payment/cancel", // URL a donde redirigir si el pago es cancelado
+      success_url:
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:3000/payment/success"
+          : "https://nextjs-ecommerce-shoeadev.vercel.app/payment/success", // URL a donde redirigir tras un pago exitoso
+      cancel_url:
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:3000/payment/cancel"
+          : "https://nextjs-ecommerce-shoeadev.vercel.app/payment/cancel", // URL a donde redirigir si el pago es cancelado
       metadata: {
         userId: user.id, // Se guarda el ID del usuario en los metadatos de la sesión
       },

@@ -37,7 +37,11 @@ export async function GET() {
     }
 
     // Redirigir al usuario a la página principal
-    return NextResponse.redirect("http://localhost:3000/");
+    return NextResponse.redirect(
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000/"
+        : "https://nextjs-ecommerce-shoeadev.vercel.app/"
+    );
   } catch (error) {
     return NextResponse.json(
       { message: "Internal Server Error" },
